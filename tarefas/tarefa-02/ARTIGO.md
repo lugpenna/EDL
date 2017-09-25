@@ -1,4 +1,4 @@
-![Elixir Banner](imagens/elixir-banner.png)
+![Elixir Banner](elixir-banner.png)
 
 
 Sobre 
