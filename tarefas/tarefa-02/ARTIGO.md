@@ -407,9 +407,9 @@ iex> Example.add(2, 3)
 :ok
 ```
 
-```elixir
-Para avaliar a função de forma assíncrona usamos spawn/3:
 
+Para avaliar a função de forma assíncrona usamos spawn/3:
+```elixir
 iex> spawn(Example, :add, [2, 3])
 5
 #PID<0.80.0>
