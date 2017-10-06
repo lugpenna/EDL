@@ -384,6 +384,58 @@ Resultado de 1 * 2: 2
 Resultado de 5 - 1: 4
 ```
 
+Atores
+---
+	
+Um dos pontos ofertados pelo Elixir é o suporte a concorrência. Graças à Erlang VM, concorrência no Elixir é mais fácil do que esperamos. O modelo de concorrência replica sobre Atores, um processo constante que se comunica com outros processos através de passagem de mensagem.
+
+A forma mais fácil para criar um novo processo é o spawn na qual tem tanto uma função nomeada ou anônima. Quando criamos um novo processo ele retorna um Process Identifier ou PID, para exclusivamente identificá-lo dentro de nossa aplicação.
+
+Para iniciar criaremos um módulo e definiremos uma função que gostariamos de executar:
+
+```elixir
+defmodule Example do
+  def add(a, b) do
+    IO.puts(a + b)
+  end
+end
+```
+
+```elixir
+iex> Example.add(2, 3)
+5
+:ok
+```
+
+```elixir
+Para avaliar a função de forma assíncrona usamos spawn/3:
+
+iex> spawn(Example, :add, [2, 3])
+5
+#PID<0.80.0>
+```
+
+Para comunicar-se, os processos dependem de passagem de mensagens. Há dois componentes principais para isso: send/2 e receive. A função send/2 nos permite enviar mensagens para PIDs. Para ouvir usamos receive para combinar as mensagens, se nenhuma correspondência for encontrada a execução continua ininterrupta.
+
+```elixir
+defmodule Example do
+  def listen do
+    receive do
+      {:ok, "hello"} -> IO.puts "World"
+    end
+  end
+end
+
+iex> pid = spawn(Example, :listen, [])
+#PID<0.108.0>
+
+iex> send pid, {:ok, "hello"}
+World
+{:ok, "hello"}
+
+iex> send pid, :ok
+:ok
+```
 
 Conclusão
 ----
