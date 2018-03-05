@@ -63,8 +63,8 @@ total = calcMedia turma
 gabaritouP1: Aluno -> Bool
 gabaritouP1 (_, p1, _) = p1 == 10
 
-turma_dez_p1: Turma
-turma_dez_p1 = List.filter gabaritouP1 turma
+list_dez_p1: Turma
+list_dez_p1 = List.filter gabaritouP1 turma
 
 -- e) LISTA COM OS NOMES E MEDIAS DOS ALUNOS APROVADOS ([("Maria",9), ...])
 listaMedia: Aluno -> (String, Float)
@@ -77,11 +77,11 @@ aprovados2: List (String,Float)
 aprovados2 = mediaAprovados turma
 
 -- f) LISTA COM TODAS AS NOTAS DE TODAS AS PROVAS ([7,4,10,8,...])
-concatenaNotas: Aluno -> List Float -> List Float
-concatenaNotas (_, p1, p2) notas = p1 :: p2 :: notas
+concatNotas: Aluno -> List Float -> List Float
+concatNotas (_, p1, p2) notas = p1 :: p2 :: notas
 
 notas: List Float
-notas = List.foldr concatenaNotas [] turma
+notas = List.foldr concatNotas [] turma
 
 -- É permitido usar funções auxiliares, mas não é necessário.
 -- (As soluções são pequenas.)
